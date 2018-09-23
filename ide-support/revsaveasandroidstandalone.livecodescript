@@ -845,7 +845,9 @@ private command revSaveAsMobileStandaloneMain pStack, pApkFile, pTarget, pSettin
             put url ("binfile:" & tLib) into \
                   url ("binfile:" & tArchLibsBuildFolders[__ArchABI(tArch)] & slash & tSourceFile)
             
-            put return & tSourceName & ":./" & tSourceFile after pSettings["android,library"]
+            if (tSourceName & ":./" & tSourceFile) is not among the lines of pSettings["android,library"] then
+               put return & tSourceName & ":./" & tSourceFile after pSettings["android,library"]
+            end if
          end repeat
       end repeat
       
